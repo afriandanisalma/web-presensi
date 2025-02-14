@@ -1,0 +1,8 @@
+.sidebar-header {
+    text-align: center;
+    color: #1a1919; /* Warna teks putih */
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase; /* Membuat teks menjadi huruf besar */
+}
