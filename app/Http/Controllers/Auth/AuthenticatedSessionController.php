@@ -29,6 +29,9 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         return redirect('Dashboard');
+
+        
+
     }
 
     /**
@@ -42,6 +45,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }

@@ -7,20 +7,17 @@ use Illuminate\Http\Request;
 
 class PesertaController extends Controller
 {
-    // Menampilkan daftar peserta
     public function index()
     {
         $pesertas = Peserta::all();
         return view('peserta.index', compact('pesertas'));
     }
 
-    // Menampilkan form tambah peserta
     public function create()
     {
         return view('peserta.create');
     }
 
-    // Menyimpan data peserta baru
     public function store(Request $request)
     {
         $request->validate([
@@ -40,14 +37,12 @@ class PesertaController extends Controller
         return redirect()->route('peserta.index')->with('success', 'Peserta berhasil ditambahkan.');
     }
 
-    // Menampilkan form edit peserta
     public function edit($id)
     {
         $peserta = Peserta::findOrFail($id);
         return view('peserta.edit', compact('peserta'));
     }
 
-    // Memperbarui data peserta
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -68,7 +63,6 @@ class PesertaController extends Controller
         return redirect()->route('peserta.index')->with('success', 'Peserta berhasil diperbarui.');
     }
 
-    // Menghapus peserta
     public function destroy($id)
     {
         $peserta = Peserta::findOrFail($id);

@@ -3,13 +3,14 @@
 @section('breadcrumb_parent', 'Pages')
 @section('breadcrumb_current', 'Izin Peserta')
 
-@section('izin_admin', 'active bg-gradient-dark text-white')
+@section('izin_admin', 'active bg-gradient-purple text-white')
 
 @section('content')
-<div class="container">
-    <h2>Daftar Izin Peserta</h2>
-    <table class="table table-bordered">
-        <thead>
+<div class="container my-4">
+    <h2 class="mb-4">Daftar Izin Peserta</h2>
+    <div class="table-responsive bg-white p-3 rounded shadow">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table text-center">
             <tr>
                 <th>Nama</th>
                 <th>Tanggal Mulai</th>
@@ -42,5 +43,6 @@
             @endforeach
         </tbody>
     </table>
+</div>
 </div>
 @endsection

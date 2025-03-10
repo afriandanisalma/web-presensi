@@ -3,8 +3,10 @@
 @section('breadcrumb_parent', 'Pages')
 @section('breadcrumb_current', 'Dashboard')
 
-@section('Dashboard', 'active bg-gradient-dark text-white')
+@section('Dashboard', 'active bg-gradient-purple text-white')
+
 @section('content')
+
 
 <div class="row">
     <div class="ms-3">
@@ -31,7 +33,7 @@
         <div class="card-body d-flex justify-content-between align-items-center">
           <div>
             <p class="text-sm text-muted mb-0">Jumlah Kehadiran</p>
-            <h3 class="mb-0">0</h3>
+            <h3 class="mb-0">{{ $totalKehadiran }}</h3>
           </div>
           <div class="d-flex align-items-center justify-content-center bg-success text-white p-3 rounded-circle" style="width: 50px; height: 50px;">
             <i class="material-symbols-rounded" style="font-size: 2rem;">check_circle</i>

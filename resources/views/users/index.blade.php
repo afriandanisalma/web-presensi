@@ -3,14 +3,14 @@
 @section('breadcrumb_parent', 'Pages')
 @section('breadcrumb_current', 'Users')
 
-@section('users', 'active bg-gradient-dark text-white')
+@section('users', 'active bg-gradient-purple text-white')
 
 @section('content')
 <div class="container">
     <h2 class="mb-4">Data User</h2>
     
     <!-- Tombol untuk membuka modal tambah user -->
-    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addUserModal">
+    <button class="btn btn-purple text-white mb-3" data-bs-toggle="modal" data-bs-target="#addUserModal">
         <i class="fas fa-user-plus"></i> Tambah Akun
     </button>
 
@@ -24,9 +24,9 @@
     <!-- Card Tabel Data User -->
     
         <div class="card-body">
-            <div class="table-responsive">
+            <div class="table-responsive bg-white p-3 rounded shadow">
                 <table class="table table-bordered table-hover align-middle">
-                    <thead class="table-dark text-center">
+                    <thead class="table text-center">
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
@@ -47,9 +47,15 @@
                                     </span>
                                 </td>
                                 <td class="text-center">
-                                    <button class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash-alt"></i> Hapus
+                                    
+                                <form action="{{ route('data.destroy', $user->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin mau hapus data ini?')">
+                                        <i class="fas fa-trash-alt"></i>
                                     </button>
+                                </form>
+                                
                                 </td>
                             </tr>
                         @endforeach
@@ -62,8 +68,8 @@
 <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="addUserModalLabel">Tambah Data User</h5>
+            <div class="modal-header ">
+                <h5 class="modal-title" id="formTitle">Tambah Data User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -95,7 +101,7 @@
                                 <input type="password" name="password" class="form-control border rounded" >
                             </div>
 
-                            <button type="submit" class="btn btn-success w-100">
+                            <button type="submit" class="btn btn-purple text-white ">
                                 <i class="fas fa-save"></i> Simpan
                             </button>
                         </form>

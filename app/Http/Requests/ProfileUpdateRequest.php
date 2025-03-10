@@ -2,29 +2,37 @@
 
 namespace App\Http\Requests;
 
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class ProfileUpdateRequest extends FormRequest
 {
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => [
-                'required',
-                'string',
-                'lowercase',
-                'email',
-                'max:255',
-                Rule::unique(User::class)->ignore($this->user()->id),
-            ],
+            'name' => 'required|string|max:255',
+            'gender' => 'required|in:Laki-laki,Perempuan',
+            'address' => 'nullable|string|max:500',
+            'phone' => 'nullable|string|max:15',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Nama tidak boleh kosong.',
+            'gender.required' => 'Jenis kelamin tidak boleh kosong.',
+            'gender.in' => 'Pilih jenis kelamin yang valid.',
+            'photo.image' => 'Foto harus berupa gambar.',
+            'photo.mimes' => 'Foto hanya boleh berformat jpeg, png, jpg, gif, svg.',
+            'photo.max' => 'Foto maksimal 2MB.',
+            'phone.numeric' => 'Nomor telepon hanya boleh berisi angka.',
+            'phone.digits_between' => 'Nomor telepon harus memiliki panjang antara 10 hingga 15 digit.',
         ];
     }
 }

@@ -29,7 +29,7 @@
   --bs-gray-700: #404040;
   --bs-gray-800: #262626;
   --bs-gray-900: #171717;
-  --bs-primary: #e91e63;
+  --bs-primary: #b40ca6;
   --bs-secondary: #737373;
   --bs-success: #4CAF50;
   --bs-info: #1A73E8;
@@ -208,7 +208,7 @@ body {
   text-align: var(--bs-body-text-align);
   background-color: var(--bs-body-bg);
   -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(10, 10, 10, 0);
+  -webkit-tap-highlight-color: rgba(166, 34, 179, 0)
 }
 
 hr {

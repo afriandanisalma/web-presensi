@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -16,6 +17,13 @@ use Illuminate\Validation\ValidationException;
 class ProfileController extends Controller
 {
 
+    public function show()
+{
+    $user = Auth::user();
+    return view('profile.index', compact('user'));
+}
+
+
     public function index()
     {
         return view('profile', ['user' => Auth::user()]);
@@ -24,52 +32,37 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(ProfileUpdateRequest $request): View
     {
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
     }
 
-    public function update(Request $request)
+    
+    public function update(ProfileUpdateRequest $request)
     {
-        $user = User::where('id', operator: Auth::id())->get();
-        // dd($user);
-        $request->validate([
-            'name'    => 'required|string|max:255',
-            'photo'   => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'gender'  => 'nullable|string',
-            'address' => 'nullable|string',
-            'phone'   => 'nullable|string|max:15',
-        ]);
+    $user = User::find(Auth::id());
 
-        if ($request->hasFile('photo')) {
-            // Hapus foto lama jika ada
-            if ($user->photo) {
-                Storage::disk('public')->delete($user->photo);
-            }
+    if (!$user) {
+        return redirect()->route('profile.index')->with('error', 'User tidak ditemukan.');
+    }
 
-            // Simpan foto baru
-            // $path = $request->file('photo')->store('profiles', 'public');
-            // $user->photo = $path;
-
-            $file = $request->file('photo');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $path = Storage::disk('public')->putFileAs('profiles', $file, $filename);
-            $fullPath = '/storage/' . $path;
-
-            $user->photo = $fullPath;
+    if ($request->hasFile('photo')) {
+        if ($user->photo && file_exists(public_path(path: 'storage/' . $user->photo))) {
+            unlink(public_path('storage/' . $user->photo));
         }
 
-        $user->name = $request->name;
-        $user->gender = $request->gender;
-        $user->address = $request->address;
-        $user->phone = $request->phone;
-
-        $user->save();
+        $path = $request->file('photo')->store('profile_photos', 'public');
         
-        return redirect()->route('profile.index')->with('success', 'Profil berhasil diperbarui.');
+        $user->photo = $path;
     }
+
+    $user->update($request->except('photo'));
+
+    return redirect()->route('profile.index')->with('success', 'Profil berhasil diperbarui.');
+    }
+
 
     public function updatePassword(Request $request)
     {
@@ -81,13 +74,13 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         if (!Hash::check($request->current_password, $user->password)) {
-            return redirect()->route('profile')->with('error', 'Password saat ini salah.');
+            return redirect()->route('profile.edit')->with('error', 'Password saat ini salah.');
         }
 
         $user->password = Hash::make($request->new_password);
        
 
-        return redirect()->route('profile')->with('success', 'Password berhasil diperbarui.');
+        return redirect()->route('profile.edit')->with('success', 'Password berhasil diperbarui.');
     }
 
     

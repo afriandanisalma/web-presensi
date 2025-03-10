@@ -6,3 +6,40 @@
     font-weight: bold;
     text-transform: uppercase; /* Membuat teks menjadi huruf besar */
 }
+
+.bg-gradient-purple {
+    background: linear-gradient(87deg,  #533fdb 0, #7461ec 100%) !important;
+  }
+  
+.btn-purple{
+    background: linear-gradient(87deg, #7461ec 0, #a395fe 100%) !important;
+}
+
+.bg-purple{
+    background: linear-gradient(87deg, #f2effd 0, #c6c0ff 100%) !important;
+}
+
+.bg-orange{
+    background: linear-gradient(87deg, #f7a252 0, #f7a252 100%) !important;
+}
+
+.bg-red{
+    background: linear-gradient(87deg, #e66e59 0, #e66e59 100%) !important;
+}
+
+.from-purple{
+    background: linear-gradient(87deg, #d1c8e6 0, #d9c1f0 100%) !important;
+}
+
+.from-white{
+    background: linear-gradient(87deg, #533fdb 0, #7a6ccf 100%) !important;
+}
+
+.nav-tabs .nav-link {
+    color: #533fdb; /* Warna teks default */
+    
+}
+
+.nav-tabs .nav-link:hover {
+    color: #533fdb; /* Warna teks saat hover */
+}

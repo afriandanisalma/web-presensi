@@ -11,4 +11,7 @@ class Izin extends Model {
     public function pengguna() {
         return $this->belongsTo(User::class, 'pengguna_id');
     }
+
+    
+
 }

@@ -9,22 +9,18 @@
       
         <ul class="navbar-nav d-flex align-items-center  justify-content-end">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                <img src="{{ Auth::user()->photo ? asset('storage/profiles/'.Auth::user()->photo) : asset('images/default.png') }}" 
-                     class="rounded-circle" width="30" height="30">
-                {{ Auth::user()->name }}
+            {{-- <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> --}}
+              <img src="{{ asset('storage/' . $user->photo) }}" alt="Profile Photo" class="rounded-circle" width="40" height="40">
+                {{-- {{ Auth::user()->name }} --}}
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="{{ route('profile.index') }}">Profil</a>
-                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                
             </div>
         </li>
         
           
-          <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit">Logout</button>
-        </form>
+          
         </ul>
 
         

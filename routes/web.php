@@ -7,23 +7,31 @@ use App\Http\Controllers\IzinController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminIzinController;
+use App\Http\Controllers\KehadiranController;
+use App\Http\Controllers\KehadiranRekapController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    // return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    // Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::patch('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update.password');
 });
+
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/Dashboard', [DashboardController::class, 'index'])->name('admin.Dashboard');
+//     Route::get('/home', [KehadiranController::class, 'index'])->name('user.home');
+// });
 
 
 Route::get('/absensi', [AbsensiController::class, 'index']);
@@ -49,13 +57,21 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('users', UserController::class)->except(['edit', 'update', 'destroy']);
+    Route::resource('users', UserController::class)->except(['edit', 'update']);
+    Route::delete('/data/{id}', [UserController::class, 'destroy'])->name('data.destroy');
 });
-
 
 Route::middleware(['auth',])->group(function () {
     Route::get('/admin/izin', [AdminIzinController::class, 'index'])->name('admin.izin.index');
     Route::put('/admin/izin/{id}/update', [AdminIzinController::class, 'updateStatus'])->name('admin.izin.updateStatus');
+    Route::get('/history', [IzinController::class, 'history'])->name('izin.history');
 });
+
+    Route::get('/home', [KehadiranController::class, 'index'])->name('home');
+    Route::post('/absensi/masuk', [KehadiranController::class, 'absenMasuk'])->name('absensi.store');
+    Route::post('/absensi/keluar', [KehadiranController::class, 'absenKeluar'])->name('absensi.keluar');
+    Route::get('/kehadiran', [KehadiranRekapController::class, 'index'])->name('kehadiran.index');
+    Route::delete('/kehadiran/{id}', [KehadiranRekapController::class, 'destroy'])->name('kehadiran.destroy');
+
 
 require __DIR__.'/auth.php';

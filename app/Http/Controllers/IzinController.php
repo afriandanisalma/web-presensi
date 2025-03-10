@@ -28,7 +28,6 @@ class IzinController extends Controller {
             
         ]);
 
-        // Simpan juga ke tabel izin_peserta
         IzinPeserta::create([
             'user_id' => Auth::id(),
             'tanggal_mulai' => $request->tanggal_mulai,
@@ -39,5 +38,33 @@ class IzinController extends Controller {
 
         return redirect()->route('izin.daftar')->with('success', 'Pengajuan izin berhasil dikirim.');
     }
+
+    public function updateStatus(Request $request, $id)
+{
+    $izin = IzinPeserta::findOrFail($id);
+    $izin->status = $request->status;
+    $izin->save();
+
+    $izinUser = Izin::where('pengguna_id', $izin->user_id)
+                    ->where('tanggal_mulai', $izin->tanggal_mulai)
+                    ->where('tanggal_selesai', $izin->tanggal_selesai)
+                    ->first();
+    
+    if ($izinUser) {
+        $izinUser->status = $request->status;
+        $izinUser->save();
+    }
+
+    return redirect()->route('admin.izin.index')->with('success', 'Status izin berhasil diperbarui.');
+}
+
+
+    public function history()
+    {
+        $izin = Izin::where('pengguna_id', Auth::id())->orderBy('created_at', 'desc')->get();
+        return view('izin.history', compact('izin'));
+    }
+    
+    
 }
 
