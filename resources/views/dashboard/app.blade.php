@@ -21,7 +21,7 @@
             <p class="text-sm text-muted mb-0">Jumlah Peserta</p>
             <h3 class="mb-0">{{ $totalPeserta }}</h3>
           </div>
-          <div class="d-flex align-items-center justify-content-center bg-primary text-white p-3 rounded-circle" style="width: 50px; height: 50px;">
+          <div class="d-flex align-items-center justify-content-center bg-backgound-purple text-white p-3 rounded-circle" style="width: 50px; height: 50px;">
             <i class="material-symbols-rounded" style="font-size: 2rem;">groups</i>
           </div>
         </div>
@@ -35,7 +35,7 @@
             <p class="text-sm text-muted mb-0">Jumlah Kehadiran</p>
             <h3 class="mb-0">{{ $totalKehadiran }}</h3>
           </div>
-          <div class="d-flex align-items-center justify-content-center bg-success text-white p-3 rounded-circle" style="width: 50px; height: 50px;">
+          <div class="d-flex align-items-center justify-content-center from-green text-white p-3 rounded-circle" style="width: 50px; height: 50px;">
             <i class="material-symbols-rounded" style="font-size: 2rem;">check_circle</i>
           </div>
         </div>
@@ -49,7 +49,7 @@
             <p class="text-sm text-muted mb-0">Jumlah Izin</p>
             <h3 class="mb-0">{{ $totalIzinPeserta }}</h3>
           </div>
-          <div class="d-flex align-items-center justify-content-center bg-warning text-white p-3 rounded-circle" style="width: 50px; height: 50px;">
+          <div class="d-flex align-items-center justify-content-center from-reed text-white p-3 rounded-circle" style="width: 50px; height: 50px;">
             <i class="material-symbols-rounded" style="font-size: 2rem;">event_busy</i>
           </div>
         </div>

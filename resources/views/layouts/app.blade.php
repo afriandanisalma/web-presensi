@@ -19,6 +19,11 @@
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             @include('layouts.navigation')
 
+            <!-- Logo -->
+            <div class="flex justify-center mt-6">
+                <img src="{{ asset('assets/img/flashsoft_logo.svg') }}" alt="FlashSoft Logo" class="w-32 h-auto">
+            </div>
+            
             <!-- Page Heading -->
             @isset($header)
                 <header class="bg-white dark:bg-purple-800 shadow">

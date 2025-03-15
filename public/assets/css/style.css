@@ -35,6 +35,18 @@
     background: linear-gradient(87deg, #533fdb 0, #7a6ccf 100%) !important;
 }
 
+.bg-backgound-purple{
+    background: linear-gradient(87deg, #be26e4 0, #be26e4 100%) !important;
+}
+
+.from-green{
+    background: linear-gradient(87deg, #533fdb 0, #533fdb 100%) !important;
+}
+
+.from-reed{
+    background: linear-gradient(87deg, #f8576c 0, #fc5369 100%) !important;
+}
+
 .nav-tabs .nav-link {
     color: #533fdb; /* Warna teks default */
     
